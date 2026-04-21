@@ -12,10 +12,14 @@ class LibraryReportWizard(models.TransientModel):
     book_id = fields.Many2one('library.book', string='Book')
     category_id = fields.Many2one('library.tags', string='Category')
     genre_id = fields.Many2one('library.genres', string='Genre')
-    sort_by = fields.Selection([
+    sort = fields.Selection([
         ('library_checkout.checkout_date', 'Checkout Date'),
         ('library_checkout.checkout_due_date', 'Due Date'),
     ], string='Sort', default='library_checkout.checkout_date')
+    sort_by=fields.Selection([
+        ('ASC', 'Ascending'),
+        ('DESC', 'Descending'),
+    ], string='Sort_by', default='ASC')
 
     def _fetch_report_data(self):
         query = """
@@ -45,33 +49,26 @@ class LibraryReportWizard(models.TransientModel):
         if self.members_id:
             query += " AND library_checkout.customer_id = %s"
             params.append(self.members_id.id)
-            print(params)
-
         if self.checkout_date:
             query += " AND library_checkout.checkout_date >= %s"
             params.append(self.checkout_date)
-            print(params)
 
         if self.return_date:
             query += " AND library_checkout.checkout_return <= %s"
             params.append(self.return_date)
 
-            print(params)
 
         if self.book_id:
             query += " AND library_checkout_line.book_id = %s"
             params.append(self.book_id.id)
-            print(params)
 
         if self.category_id:
             query += " AND library_tags.id = %s"
             params.append(self.category_id.id)
-            print(params)
 
         if self.genre_id:
             query += " AND library_genres.id = %s"
             params.append(self.genre_id.id)
-            print(params)
         query += """
             GROUP BY
                 library_checkout.cust_reference_number,
@@ -84,19 +81,23 @@ class LibraryReportWizard(models.TransientModel):
                 library_genres.name
         """
 
-        query += f" ORDER BY {self.sort_by} ASC"
+        query += f" ORDER BY {self.sort} {self.sort_by}"
 
         self.env.cr.execute(query, params)
-        print(query)
-
         rows = self.env.cr.dictfetchall()
-        print(rows)
         return rows
 
     def add_report_action(self):
         values = self._fetch_report_data()
-        data = {'lines': values}
-        print(data)
+        data = {'lines': values,
+                'partner_name': self.members_id.name if self.members_id else None,
+                'book_name': self.book_id.name if self.book_id else None,
+                'genres_name': self.genre_id.name if self.genre_id else None,
+                'tag_name': self.category_id.name if self.category_id else None,}
         return self.env.ref(
             'library_management.action_library_report_print'
         ).report_action(self, data=data)
+
+    def add_report_xlsx_action(self):
+        print("hi welcome")
+        

@@ -1,8 +1,8 @@
 <odoo>
-    <record id="action_library_report_print" model="ir.actions.report">
+    <record id="action_library_report_print" model="ir.actions.report">         
         <field name="name">Library Management Report</field>
         <field name="model">library.report.wizard</field>
-        <field name="report_type">qweb-html</field>
+        <field name="report_type">qweb-pdf</field>
         <field name="report_name">library_management.report_library_management</field>
         <field name="report_file">library_management.report_library_management</field>
     </record>
@@ -12,30 +12,82 @@
             <t t-call="web.external_layout">
                 <div class="page">
                     <h2>Library management reports</h2>
+                    <t t-if="partner_name">
+                        <p class="mb-3">
+                            customer :
+                            <t t-out="partner_name"/>
+                        </p>
+                    </t>
+                    <t t-if="book_name">
+                        <p class="mb-3">
+                            book :
+                            <t t-out="book_name"/>
+                        </p>
+                    </t>
+                     <t t-if="genres_name">
+                        <p class="mb-3">
+                            genre :
+                            <t t-out="genres_name"/>
+                        </p>
+                    </t>
+                     <t t-if="tag_name">
+                        <p class="mb-3">
+                            tag :
+                            <t t-out="tag_name"/>
+                        </p>
+                    </t>
                     <table class="table table-bordered">
-                        <thead class="table-light">
+                        <thead>
                             <tr>
                                 <th>Reference ID</th>
-                                <th>Name</th>
-                                <th>Book</th>
+                                <t t-if="not partner_name">
+                                    <th>Name</th>
+                                </t>
+                                <t t-if="not book_name">
+                                    <th>Book</th>
+                                </t>
                                 <th>Author</th>
                                 <th>Checkout Date</th>
                                 <th>Return Date</th>
-                                <th>Category</th>
-                                <th>Genre</th>
+                                 <t t-if="not tag_name">
+                                     <th>Category</th></t>
+                                <t t-if="not genres_name">
+                                    <th>Genre</th></t>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="lines" t-as="line">
                                 <tr>
-                                    <td><t t-esc="line['reference_id']"/></td>
-                                    <td><t t-esc="line['member_name']"/></td>
-                                    <td><t t-esc="line['book_name']"/></td>
-                                    <td><t t-esc="line['author'] or ''"/></td>
-                                    <td><t t-esc="line['checkout_date']"/></td>
-                                    <td><t t-esc="line['return_date'] or ''"/></td>
-                                    <td><t t-esc="line['category'] or ''"/></td>
-                                    <td><t t-esc="line['genre'] or ''"/></td>
+                                    <td>
+                                        <t t-esc="line['reference_id']"/>
+                                    </td>
+                                    <t t-if="not partner_name">
+                                        <td>
+                                            <t t-esc="line['member_name']"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="not book_name">
+                                        <td>
+                                            <t t-esc="line['book_name']"/>
+                                        </td>
+                                    </t>
+                                    <td>
+                                        <t t-esc="line['author'] or ''"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line['checkout_date']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line['return_date'] or ''"/>
+                                    </td>
+                                    <t t-if="not tag_name">
+                                    <td>
+                                        <t t-esc="line['category'] or ''"/>
+                                    </td></t>
+                                    <t t-if="not genres_name">
+                                    <td>
+                                        <t t-esc="line['genre'] or ''"/>
+                                    </td></t>
                                 </tr>
                             </t>
                             <t t-if="not lines">
@@ -52,3 +104,4 @@
         </t>
     </template>
 </odoo>
+

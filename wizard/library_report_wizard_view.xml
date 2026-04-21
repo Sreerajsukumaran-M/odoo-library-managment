@@ -5,7 +5,6 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-
     <record id="library_report_wizard_view_form" model="ir.ui.view">
         <field name="name">library.report.wizard.form</field>
         <field name="model">library.report.wizard</field>
@@ -21,14 +20,20 @@
                     <group>
                         <field name="checkout_date"/>
                         <field name="return_date"/>
+                        <field name="sort"/>
                         <field name="sort_by"/>
                     </group>
                 </group>
                 <footer>
                     <button name="add_report_action"
-                            string="print Report"
+                            string="print pdf"
                             type="object"
                             class="btn-primary"
+                            icon="fa-print"/>
+                     <button name="add_report_xlsx_action"
+                            string="print xlsx"
+                            type="object"
+                            class="btn btn-danger text-nowrap"
                             icon="fa-print"/>
                     <button string="Cancel"
                             class="btn-secondary"
@@ -37,7 +42,6 @@
             </form>
         </field>
     </record>
-
 </odoo>
 
 

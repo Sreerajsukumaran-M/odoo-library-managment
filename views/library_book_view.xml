@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_library_books" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="view_model_search" model="ir.ui.view">
+        <field name="name">filter</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="book_author_id"/>
+                <field name="isbn"/>
+                <field name="genres_id"/>
+                <field name="tag_ids"/>
+                <filter string="author" name="author" context="{'group_by': 'book_author_id'}"/>
+                <filter string="genres" name="genres" context="{'group_by': 'genres_id'}"/>
+                <filter string="publisher" name="publisher" context="{'group_by': 'publisher_id'}"/>
+                <filter string="publisher" name="publisher" context="{'group_by': 'publication_date'}"/>
+
+
+            </search>
+        </field>
+    </record>
+    <record id="list_view_library" model="ir.ui.view">
+        <field name="name">library.managment.list</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="book_author_id"/>
+                <field name="isbn"/>
+                <field name="publisher_id"/>
+                <field name="genres_id"/>
+                <field name="price"/>
+                <field name="cost"/>
+                <field name="publication_date"/>
+                <field name="reference_number"/>
+                <field name="status" decoration-success="status in ['available']"
+                       decoration-danger="status in ['unavailable']" decoration-warning="status in ['coming_soon']"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
+            </list>
+        </field>
+    </record>
+    <record id="seq_library_book" model="ir.sequence">
+        <field name="name">Library Book Sequence</field>
+        <field name="code">library.book</field>
+        <field name="prefix">BOOK/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="book_form_view" model="ir.ui.view">
+        <field name="name">library.book.form.view</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar"
+                           statusbar_visible='available,unavailable,coming_soon'/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="title">
+                        <field name="reference_number">Reference Number</field>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="isbn"/>
+                            <field name="price"/>
+                            <field name="cost"/>
+                            <field name="status" decoration-success="status in ['available']"
+                                   decoration-danger="status in ['unavailable']"
+                                   decoration-warning="status in ['coming_soon']"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="book_author_id"/>
+                            <field name="publisher_id"/>
+                            <field name="genres_id"/>
+                            <field name="publication_date"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <record id="genres_fiction" model="library.genres">
+        <field name="name">fiction</field>
+    </record>
+    <record id="genres_nonfiction" model="library.genres">
+        <field name="name">non fiction</field>
+    </record>
+    <record id="genres_thriller" model="library.genres">
+        <field name="name">thriller</field>
+    </record>
+    <record id="genres_Novel" model="library.genres">
+        <field name="name">Novel</field>
+    </record>
+</odoo>

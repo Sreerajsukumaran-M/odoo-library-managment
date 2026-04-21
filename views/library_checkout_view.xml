@@ -1,0 +1,81 @@
+<odoo>
+    <record id="action_library_checkout" model="ir.actions.act_window">
+        <field name="name">checkout</field>
+        <field name="res_model">library.checkout</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="seq_library_check" model="ir.sequence">
+        <field name="name">Library customer Sequence</field>
+        <field name="code">library.checkout</field>
+        <field name="prefix">CUST/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="checkout_list_view" model="ir.ui.view">
+        <field name="name">library.checkout.list</field>
+        <field name="model">library.checkout</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="customer_id"/>
+                <field name="cust_reference_number"/>
+            </list>
+        </field>
+    </record>
+    <record id="checkout_form_view" model="ir.ui.view">
+        <field name="name">library.checkout.form</field>
+        <field name="model">library.checkout</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="confirm_action" class="oe_highlight" type="object" string="Confirm"
+                            invisible="state in ['checkout','returned','overdue','cancel']"/>
+                    <button name="return_action" class="oe_highlight" type="object" string="Return"
+                            invisible="state in ['returned','cancel']"/>
+                    <button name="cancel_action" class="oe_highlight" type="object" string="Cancel"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible='new,checkout,returned,overdue,cancel'/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Paid" invisible="payment_bool == 0"/>
+                    <group>
+                        <field name="cust_reference_number">Reference Number</field>
+                        <field name="customer_id" readonly="state != 'new'"/>
+                        <field name="phone" readonly="state != 'new'"/>
+                        <field name="email" readonly="state != 'new'"/>
+                        <field name="checkout_date" readonly="state != 'new'"/>
+                        <field name="checkout_due_date" readonly="state != 'new'"/>
+                        <field name="checkout_return" readonly="state != 'new'"/>
+                        <field name="penalty" readonly="state != 'new'"/>
+                        <field name="state"/>
+                    </group>
+                    <notebook>
+                        <page string="all books" required='True'>
+                            <field name="checkout_line_ids" readonly="state not in['new']" required='True'>
+                                <list editable="bottom">
+                                    <field name="book_id" required="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="checkout_line_list_view" model="ir.ui.view">
+        <field name="name">library.checkout.line.list</field>
+        <field name="model">library.checkout.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="checkout_id"/>
+                <field name="referal_number"/>
+                <field name="book_id"/>
+                <field name="checkout_date"/>
+                <field name="return_date"/>
+                <field name="due_date"/>
+
+            </list>
+        </field>
+    </record>
+</odoo>

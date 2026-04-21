@@ -1,0 +1,55 @@
+<odoo>
+    <menuitem id="menu_library_root" name="Library"/>
+
+
+    <menuitem
+            id="menu_library_checkout"
+            name="checkout"
+            parent="menu_library_root"
+            action="action_library_checkout"/>
+    <menuitem
+            id="menu_library_books"
+            name="Books"
+            parent="menu_library_root"
+            action="action_library_books"/>
+
+    <menuitem
+            id="menu_library_report"
+            name="Report"
+            parent="menu_library_root"/>
+    <menuitem
+            id="menu_library_borrow_report"
+            name="Books Borrow Report"
+            parent="menu_library_report"
+            action="action_library_report_wizard"/>
+    <menuitem
+            id="menu_library_config"
+            name="configuration"
+            parent="menu_library_root"/>
+
+    <menuitem
+            id="menu_library_author"
+            name="author"
+            parent="menu_library_config"
+            action="action_library_author"/>
+    <menuitem
+            id="menu_library_publishers"
+            name="publishers"
+            parent="menu_library_config"
+            action="action_library_publishers"/>
+    <menuitem
+            id="menu_library_genres"
+            name="genres"
+            parent="menu_library_config"
+            action="action_library_genres"/>
+    <menuitem
+            id="menu_library_tags"
+            name="Tags"
+            parent="menu_library_config"
+            action="action_library_tag"/>
+    <menuitem
+            id="menu_library_settings"
+            name="Settings"
+            parent="menu_library_config"
+            action="action_library_settings"/>
+</odoo>

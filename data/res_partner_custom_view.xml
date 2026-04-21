@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_res_partner_form_inherit_custom_field1" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.library.management</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <div name="button_box" class="oe_button_box">
+                <button name="action_book_smarticon" class="oe_stat_button" type="object"
+                        icon="fa-list" string="Books">
+                    <field name="book_count" widget="statinfo"/>
+
+                </button>
+                <button name="action_late_return_smarticon" class="oe_stat_button" type="object"
+                        icon="fa-list-ol">
+                    <field name="late_return" widget="statinfo"/>
+
+                </button>
+                <button name="action_total_penalty_smarticon" class="oe_stat_button" type="object"
+                        icon="fa-list-ul" clickable="0">
+                    <field name="total_penalty" widget="statinfo"/>
+                </button>
+
+            </div>
+
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="maximum_limit"/>
+                <field name="book_id" invisible="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<odoo>
+    <record id="action_library_publishers" model="ir.actions.act_window">
+        <field name="name">publisher</field>
+        <field name="res_model">library.publisher</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="publisher_list_view" model="ir.ui.view">
+        <field name="name">library.publisher.list</field>
+        <field name="model">library.publisher</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+    <record id="publisher_form_view" model="ir.ui.view">
+        <field name="name">library.publisher.form</field>
+        <field name="model">library.publisher</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name">Name</field>
+                        <field name="description">description</field>
+                    </group>
+                    <notebook>
+                        <page string="books">
+                            <field name="book_ids">
+
+                                <list readonly="1">
+                                    <field name="name"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+

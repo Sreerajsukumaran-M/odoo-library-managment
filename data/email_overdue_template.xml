@@ -1,0 +1,29 @@
+<odoo>
+    <record id="email_template_checkout_overdue" model="mail.template">
+        <field name="name">checkout book over due</field>
+        <field name="model_id" ref="library_management.model_library_checkout"/>
+        <field name="subject">checkout book over due mail</field>
+        <field name="email_to">{{object.email}}</field>
+        <field name="body_html" type="html">
+            <p>Hi,<t t-out="object.customer_id.name"/>,
+            </p>
+            <p>This is a reminder mail about you borrowed book has been overdue</p>
+            <ol>
+                <t t-foreach="object.checkout_line_ids" t-as="i">
+                    <li>
+                        <t t-out="i.book_id.name"/>
+                    </li>
+                </t>
+            </ol>
+            <p>total penalty amount is :
+                <t t-out="object.penalty"/>
+            </p>
+            <p>
+                <strong>Please make sure you return it.</strong>
+            </p>
+            <br/>
+            <p>Best regards,<br/>Library Team
+            </p>
+        </field>
+    </record>
+</odoo>

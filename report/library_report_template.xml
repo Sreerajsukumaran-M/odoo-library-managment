@@ -1,0 +1,54 @@
+<odoo>
+    <record id="action_library_report_print" model="ir.actions.report">
+        <field name="name">Library Management Report</field>
+        <field name="model">library.report.wizard</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">library_management.report_library_management</field>
+        <field name="report_file">library_management.report_library_management</field>
+    </record>
+
+    <template id="report_library_management">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Library management reports</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Reference ID</th>
+                                <th>Name</th>
+                                <th>Book</th>
+                                <th>Author</th>
+                                <th>Checkout Date</th>
+                                <th>Return Date</th>
+                                <th>Category</th>
+                                <th>Genre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="lines" t-as="line">
+                                <tr>
+                                    <td><t t-esc="line['reference_id']"/></td>
+                                    <td><t t-esc="line['member_name']"/></td>
+                                    <td><t t-esc="line['book_name']"/></td>
+                                    <td><t t-esc="line['author'] or ''"/></td>
+                                    <td><t t-esc="line['checkout_date']"/></td>
+                                    <td><t t-esc="line['return_date'] or ''"/></td>
+                                    <td><t t-esc="line['category'] or ''"/></td>
+                                    <td><t t-esc="line['genre'] or ''"/></td>
+                                </tr>
+                            </t>
+                            <t t-if="not lines">
+                                <tr>
+                                    <td colspan="8">
+                                        No records found.
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

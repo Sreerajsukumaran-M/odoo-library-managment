@@ -1,0 +1,7 @@
+<odoo>
+<!--       <record id="action_report_books" model="ir.actions.act_window">-->
+<!--        <field name="name">books report</field>-->
+<!--        <field name="res_model">library.book.reports</field>-->
+<!--        <field name="view_mode">graph,pivot,list</field>-->
+<!--    </record>-->
+</odoo>

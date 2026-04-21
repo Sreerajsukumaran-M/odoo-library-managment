@@ -1,0 +1,24 @@
+<odoo>
+    <record id="action_library_wizard" model="ir.actions.act_window">
+        <field name="name">wizard</field>
+        <field name="res_model">library.checkout.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="library_checkout_wizard_view_form" model="ir.ui.view">
+        <field name="name">library.checkout.wizard.view.form</field>
+        <field name="model">library.checkout.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="book_ids"/>
+                    </group>
+                    <footer>
+                        <button name="add_checkout_action" class="btn-primary" type="object" string="Add"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

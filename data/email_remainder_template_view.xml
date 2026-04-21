@@ -1,0 +1,36 @@
+<odoo>
+    <record id="email_template_checkout_remainder" model="mail.template">
+        <field name="name">checkout book remainder</field>
+        <field name="model_id" ref="library_management.model_library_checkout"/>
+        <field name="subject">checkout Reminder</field>
+        <field name="email_to">{{object.email}}</field>
+        <field name="body_html" type="html">
+            <p>Hi,
+                <t t-out="object.customer_id.name"/>
+            </p>
+            <p>This is a reminder before the due date</p>
+            <p>
+                <strong>BOOKS ARE,.</strong>
+            </p>
+            <ol>
+                <t t-foreach="object.checkout_line_ids" t-as="i">
+                    <li>
+                        <t t-out="i.book_id.name"/>
+                    </li>
+
+                </t>
+            </ol>
+            <p>
+                <strong>and ,return date is
+                    <t t-out="object.checkout_due_date"/>
+                </strong>
+            </p>
+            <p>
+                <strong>Please make sure you return it on time.</strong>
+            </p>
+            <br/>
+            <p>Best regards,<br/>Library Team
+            </p>
+        </field>
+    </record>
+</odoo>

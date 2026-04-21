@@ -1,0 +1,43 @@
+<odoo>
+    <record id="action_library_genres" model="ir.actions.act_window">
+        <field name="name">genres</field>
+        <field name="res_model">library.genres</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="genres_list_view" model="ir.ui.view">
+        <field name="name">library.genres.list</field>
+        <field name="model">library.genres</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+
+    </record>
+
+    <record id="genres_form_view" model="ir.ui.view">
+        <field name="name">library.genres.form</field>
+        <field name="model">library.genres</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name">Name</field>
+                        <field name="description">description</field>
+                    </group>
+                    <notebook>
+                        <page string="books">
+                            <field name="book_ids">
+
+                                <list>
+                                    <field name="name"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

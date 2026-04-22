@@ -30,7 +30,11 @@
         'report/library_management_report_view.xml',
         'report/library_report_template.xml',
         'views/library_menu_view.xml',
+    ],
+    'assets': {
+    'web.assets_backend': [
+        'library_management/static/src/js/action_manager.js',
+    ],
+},
 
-
-    ]
 }

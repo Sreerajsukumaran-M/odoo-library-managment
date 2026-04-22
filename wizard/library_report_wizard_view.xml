@@ -33,7 +33,7 @@
                      <button name="add_report_xlsx_action"
                             string="print xlsx"
                             type="object"
-                            class="btn btn-danger text-nowrap"
+                            class="btn-primary"
                             icon="fa-print"/>
                     <button string="Cancel"
                             class="btn-secondary"

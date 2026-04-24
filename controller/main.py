@@ -8,8 +8,8 @@ from odoo.tools import html_escape
 
 class XLSXReportController(http.Controller):
 
-    @http.route('/xlsx_reports', type='http', auth='user', csrf=False)
-    def xlsx_reports(self, options, output_format, report_name, **kwargs):
+    @http.route('/xlsx_reports', type='http', auth='user')
+    def xlsx_reports(self, options, output_format, report_name):
         options = json.loads(options)
         try:
             if output_format == 'xlsx':
@@ -21,9 +21,7 @@ class XLSXReportController(http.Controller):
                          content_disposition(f"{report_name}.xlsx")),
                     ]
                 )
-                # Create wizard with correct field names
-                # keys here must match wizard field names exactly
-                wizard = request.env['library.report.wizard'].with_user(
+                abc = request.env['library.report.wizard'].with_user(
                     request.session.uid
                 ).create({
                     'members_id':    options.get('members_id') or False,
@@ -35,8 +33,7 @@ class XLSXReportController(http.Controller):
                     'sort':          options.get('sort') or 'library_checkout.checkout_date',
                     'sort_by':       options.get('sort_by') or 'ASC',
                 })
-                wizard.generate_xlsx_report(options, response)
-                response.set_cookie('fileToken', kwargs.get('token', 'token'))
+                abc.generate_xlsx_report(options, response)
                 return response
 
         except Exception as e:

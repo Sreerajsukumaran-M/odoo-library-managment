@@ -4,7 +4,7 @@
     'version': '1.0',
     'category': 'Real Estate',
     'summary': 'library managment',
-    'depends': ['base', 'mail', 'contacts', 'sale', 'account'],
+    'depends': ['base', 'mail', 'contacts', 'sale', 'account','website','fleet'],
     'application': True,
     'installable': True,
     'sequence': 3,
@@ -17,6 +17,9 @@
         'views/library_author_view.xml',
         'views/library_publisher_view.xml',
         'views/library_genres_view.xml',
+        'views/library_donation_template.xml',
+        'views/library_donation_template.xml',
+        'views/library_customer_portal.xml',
 
         'views/library_tag_view.xml',
         'views/library_settings_view.xml',

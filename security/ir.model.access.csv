@@ -1,5 +1,5 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_library_book,access.library.book,model_library_book,library_management.group_library_assistant,1,0,0,0
+access_library_book,access.library.book,model_library_book,library_management.group_library_assistant,1,1,1,1
 access_library_author,access.library.author,model_library_author,library_management.group_library_assistant,1,0,0,0
 access_library_publisher,access.library.publisher,model_library_publisher,library_management.group_library_assistant,1,0,0,0
 access_library_genres,access.library.genres,model_library_genres,library_management.group_library_assistant,1,0,0,0

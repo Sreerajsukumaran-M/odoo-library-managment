@@ -10,3 +10,4 @@ from . import library_settings
 from . import res_partner
 from . import account_move
 from . import library_book_reports
+from . import library_donation

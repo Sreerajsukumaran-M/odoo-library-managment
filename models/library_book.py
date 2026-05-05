@@ -12,7 +12,7 @@ class LibraryBook(models.Model):
     reference_number = fields.Char(string="Reference Number", default=lambda self: _('New'), readonly=True, copy=False,
                                    help="Reference Number of the book")
     name = fields.Char(required=True)
-    image = fields.Image(max_width=500, max_height=50)
+    image = fields.Binary(max_width=500, max_height=50)
     isbn = fields.Char(string="ISBN", required=True)
     price = fields.Char(string="Price")
     cost = fields.Char(string="Cost")
@@ -39,13 +39,17 @@ class LibraryBook(models.Model):
             if vals.get('reference_number', _('New')) == _('New'):
                 vals['reference_number'] = self.env['ir.sequence'].next_by_code('library.book')
 
+
             product = self.env['product.product'].create({
                 'name': vals.get('name'),
                 'list_price': vals.get('price'),
                 'standard_price': vals.get('cost'),
 
             })
+
             vals['product_id'] = product.id
+            print((self.env.user.name))
+            print(self.env['library.book'].search([('create_uid','=',self.env.user.id)]))
         return super().create(vals_list)
 
     @api.constrains('isbn')

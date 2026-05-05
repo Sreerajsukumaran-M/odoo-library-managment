@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- The QWeb Template for our Custom Page -->
+    <template id="donation_form_template" name="donation Form">
+        <t t-call="website.layout">
+            <section class="d-flex align-items-center justify-content-center vh-100" style="background-color: #f8f9fa;">
+                <div class="card shadow-lg rounded-10">
+                    <div class="card-body p-5">
+                        <h3 class="text-center mb-4">Donation form for Library</h3>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">book Name</label>
+                                        <input type="text" name="name" class="form-control rounded-2"
+                                               placeholder="name" required="True"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Author Name</label>
+                                        <input type="text" name="author" class="form-control rounded-2"
+                                               placeholder="Author name"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">ISBN number</label>
+                                        <input type="number" name="isbn" class="form-control rounded-2"
+                                               placeholder="ISBN number" required="True"/>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label fw-semibold">product description</label>
+                                        <input type="text" name="phone" class="form-control rounded-2"
+                                               placeholder='description'/>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-4">
+                                        <img src="library_management/static/src/images/Library Management Donation Form - Odoo.png"/>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label fw-semibold">condition</label>
+                                        <input type="text" name="phone" class="form-control rounded-2"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">image</label>
+                                <br/>
+                                <div>
+                                    <input type="file" multiple="multiple" class="logo_selection_input"
+                                           name="book_image"/>
+
+                                </div>
+                            </div>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        <button type="submit" class="btn btn-success btn-block rounded-3 py-2">
+                                            next
+                                        </button>
+
+                                        <a href="/hello-odoo" class="btn btn-danger btn-block rounded-3 py-2">
+                                            reset
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+    <record id="hello_page_menu" model="website.menu">
+        <field name="name">Donation Form</field>
+        <field name="url">/hello-odoo</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">99</field>
+    </record>
+    <template id="success_form_template" name="Donation Form">
+        <t t-call="website.layout">
+            <section class="d-flex align-items-center justify-content-center vh-100" style="background-color: #f8f9fa;">
+                <div class="card shadow-lg rounded-4" style="width: 70%;">
+                    <div class="card-body p-5">
+                        <h3 class="text-center mb-4">Thank you for your contribution
+                            <t t-esc="user_name"/>
+                        </h3>
+                        <br/>
+                        <div class="col-md-6">
+                            <a href="/hello-odoo" class="btn btn-primary btn-block rounded-3 py-2">
+                                add new book
+                            </a>
+                            <a href="/library_management" class="btn btn-success btn-block rounded-3 py-2">
+                                check contributions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+    <template id="uniqu_field_form_template" name="ISBN Form">
+        <t t-call="website.layout">
+            <section class="d-flex align-items-center justify-content-center vh-100" style="background-color: #f8f9fa;">
+                <div class="card shadow-lg rounded-4">
+                    <div class="card-body p-5">
+                        <h3 class="text-center mb-4">ISBN must be unique
+                            <t t-esc="user_name"/>
+                        </h3>
+                        <img src="library_management/static/src/images/Library Management Donation Form - Odoo.png"/>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

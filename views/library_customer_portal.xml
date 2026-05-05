@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_library" name="library_management" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'library_management'" t-attf-class="breadcrumb-item #{'active ' if fleet else ''}">
+                <a t-if="library_management" t-attf-href="/library_management?{{ keep_query() }}">library_management</a>
+                <t t-else="">library_management</t>
+            </li>
+        </xpath>
+    </template>
+    <template id="portal_my_home_menu_contribution" name="library_management" inherit_id="portal.portal_my_home"
+              customize_show="True" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_client_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_client_category" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                    <t t-set="title">Contributions</t>
+                <t t-set="url" t-value="'/library_management'"/>
+                <t t-set="text">my book contributions</t>
+                    <t t-set="placeholder_count" t-value="'portal_library'"/>
+            </t>
+        </div>
+    </template>
+    <template id="portal_my_home_contribution_views" name="contribution">
+        <t t-call="portal.portal_layout">
+
+
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-left">books Name</th>
+                    </tr>
+                </thead>
+                <t t-foreach="books" t-as="record">
+                    <tr>
+                        <td class='text-left'>
+                            <span t-field="record.name"/>
+                        </td>
+
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

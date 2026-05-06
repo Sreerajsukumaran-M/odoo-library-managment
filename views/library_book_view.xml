@@ -85,6 +85,13 @@
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="related attachments">
+                            <field name="book_image"  widget="many2many_binary">
+
+                            </field>
+                        </page>
+                    </notebook>
 
                 </sheet>
             </form>

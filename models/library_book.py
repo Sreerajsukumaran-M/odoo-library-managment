@@ -30,6 +30,8 @@ class LibraryBook(models.Model):
     books_count = {}
     user_id = fields.Many2one('res.users', string="User")
     product_id = fields.Many2one('product.product', string="Product")
+    book_image = fields.Many2many(comodel_name="ir.attachment", string="Attachments")
+
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -39,11 +41,15 @@ class LibraryBook(models.Model):
             if vals.get('reference_number', _('New')) == _('New'):
                 vals['reference_number'] = self.env['ir.sequence'].next_by_code('library.book')
 
+            image=vals.get('image')
+            if not image:
+                image= None
 
             product = self.env['product.product'].create({
                 'name': vals.get('name'),
                 'list_price': vals.get('price'),
                 'standard_price': vals.get('cost'),
+                'image_1920'  : image,
 
             })
 
@@ -62,3 +68,5 @@ class LibraryBook(models.Model):
             ])
             if existing:
                 raise ValidationError("ISBN already exists")
+
+

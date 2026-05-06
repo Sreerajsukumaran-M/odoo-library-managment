@@ -80,19 +80,22 @@
     <template id="success_form_template" name="Donation Form">
         <t t-call="website.layout">
             <section class="d-flex align-items-center justify-content-center vh-100" style="background-color: #f8f9fa;">
-                <div class="card shadow-lg rounded-4" style="width: 70%;">
+                <div class="card shadow-lg rounded-4">
                     <div class="card-body p-5">
                         <h3 class="text-center mb-4">Thank you for your contribution
                             <t t-esc="user_name"/>
                         </h3>
                         <br/>
                         <div class="col-md-6">
+                            <div class="card-body p-5">
                             <a href="/hello-odoo" class="btn btn-primary btn-block rounded-3 py-2">
                                 add new book
-                            </a>
+                            </a><br/><br/>
                             <a href="/library_management" class="btn btn-success btn-block rounded-3 py-2">
                                 check contributions
+
                             </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,9 +108,12 @@
                 <div class="card shadow-lg rounded-4">
                     <div class="card-body p-5">
                         <h3 class="text-center mb-4">ISBN must be unique
-                            <t t-esc="user_name"/>
                         </h3>
-                        <img src="library_management/static/src/images/Library Management Donation Form - Odoo.png"/>
+                        <div class="card-body p-5">
+                            <a href="/hello-odoo" class="btn btn-primary btn-block rounded-3 py-2">
+                                add another
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -18,12 +18,12 @@ class DonationController(http.Controller):
         name=kwargs['name']
         author=kwargs['author']
         isbn=kwargs['isbn']
-        image_file = kwargs['book_image']
-        if image_file:
-            image = base64.b64encode(image_file.read())
+        image_files=kwargs['book_image']
+        image_file = request.httprequest.files.getlist('book_image')
+        if image_files:
+            image = base64.b64encode(image_files.read())
         else:
             image = None
-
         authors=self.env['library.author'].sudo().search([('name','=',author)])
         print(authors)
         if not authors:
@@ -36,14 +36,33 @@ class DonationController(http.Controller):
             return request.render('library_management.uniqu_field_form_template')
         authors = self.env['library.author'].sudo().search([('name', '=', author)])
         print(authors)
-        self.env['library.book'].sudo().create({
+        new_record=self.env['library.book'].sudo().create({
             'name':name,
             'isbn':isbn,
             'image':image,
             'book_author_id':authors.id,
             'status':'coming_soon',
-
         })
+        if image_file:
+            img_list = []
+            for file in image_file:
+                a=base64.b64encode(file.read())
+                if image == a:
+                    continue
+                else:
+                    img_val = {
+                        'name': file.filename,
+                        'datas': a,
+                        'res_model': 'library.book',
+                        'res_id': new_record.id,
+                    }
+                    print(img_val)
+
+                img_list.append(request.env['ir.attachment'].sudo().create(img_val).id)
+                print(img_list)
+
+                new_record.write({'book_image': [(6, 0, img_list)]})
+
         user_name = request.env.user.name if request.env.user.id else 'Guest'
         return request.render('library_management.success_form_template', {
            'user_name': user_name,

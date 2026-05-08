@@ -36,8 +36,12 @@
                                         <img src="library_management/static/src/images/Library Management Donation Form - Odoo.png"/>
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label fw-semibold">condition</label>
-                                        <input type="text" name="phone" class="form-control rounded-2"/>
+                                        <label class="form-label fw-semibold">condition</label><br/>
+                                        <select name="condition" class="form-select form-select-sm border-dark-subtle w-100 mb-1" t-model="state.type" t-on-change="onChange">
+                                            <option value="new">New</option>
+                                            <option value="average">Average</option>
+                                            <option value="bad">Bad</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -46,8 +50,7 @@
                                 <br/>
                                 <div>
                                     <input type="file" multiple="multiple" class="logo_selection_input"
-                                           name="book_image"/>
-
+                                           name="book_image" accept="image/*"/>
                                 </div>
                             </div>
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
@@ -88,13 +91,15 @@
                         <br/>
                         <div class="col-md-6">
                             <div class="card-body p-5">
-                            <a href="/hello-odoo" class="btn btn-primary btn-block rounded-3 py-2">
-                                add new book
-                            </a><br/><br/>
-                            <a href="/library_management" class="btn btn-success btn-block rounded-3 py-2">
-                                check contributions
+                                <a href="/hello-odoo" class="btn btn-primary btn-block rounded-3 py-2">
+                                    add new book
+                                </a>
+                                <br/>
+                                <br/>
+                                <a href="/library_management" class="btn btn-success btn-block rounded-3 py-2">
+                                    check contributions
 
-                            </a>
+                                </a>
                             </div>
                         </div>
                     </div>

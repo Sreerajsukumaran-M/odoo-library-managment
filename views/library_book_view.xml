@@ -82,6 +82,7 @@
                             <field name="publisher_id"/>
                             <field name="genres_id"/>
                             <field name="publication_date"/>
+                            <field name="book_condition"/>
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
                         </group>
                     </group>

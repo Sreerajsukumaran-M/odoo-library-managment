@@ -31,8 +31,10 @@ class LibraryBook(models.Model):
     user_id = fields.Many2one('res.users', string="User")
     product_id = fields.Many2one('product.product', string="Product")
     book_image = fields.Many2many(comodel_name="ir.attachment", string="Attachments")
-
-
+    book_condition=fields.Selection([('new','New'),
+                                     ('average','Average'),
+                                     ('bad','Bad'),], default='new')
+    sale_count =fields.Integer(string="Sale Count")
     @api.model_create_multi
     def create(self, vals_list):
         """reference number calculation"""

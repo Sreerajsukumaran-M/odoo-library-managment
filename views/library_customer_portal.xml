@@ -15,10 +15,10 @@
         </xpath>
         <div id="portal_client_category" position="inside">
             <t t-call="portal.portal_docs_entry">
-                    <t t-set="title">Contributions</t>
+                <t t-set="title">Contributions</t>
                 <t t-set="url" t-value="'/library_management'"/>
                 <t t-set="text">my book contributions</t>
-                    <t t-set="placeholder_count" t-value="'portal_library'"/>
+                <t t-set="placeholder_count" t-value="'portal_library'"/>
             </t>
         </div>
     </template>
@@ -35,13 +35,71 @@
                 <t t-foreach="books" t-as="record">
                     <tr>
                         <td class='text-left'>
-                            <span t-field="record.name"/>
+                            <a t-attf-href="/my/book/#{record.id}"><span t-field="record.name"/>
+                            </a>
                         </td>
-
                     </tr>
                 </t>
             </t>
         </t>
     </template>
+     <template id="book_detail" name="Book Detail">
+    <t t-call="portal.portal_layout">
+        <div class="card shadow-lg rounded-10 p-4">
+            <div class="row mb-4">
+                <div class="col-md-3 text-center">
+                    <t t-if="book.image">
+                        <img t-attf-src="data:image/png;base64,#{book.image}"
+                             class="img-thumbnail" style="max-height:250px;"/>
+                    </t>
+                    <t t-else="">
+                        <div class="img-thumbnail d-flex align-items-center justify-content-center" style="height:250px;">
+                            <span class="text-muted">No Image</span>
+                        </div>
+                    </t>
+                </div>
+                <div class="col-md-9">
+                    <h2 t-esc="book.name"/>
+                    <table class="table table-sm table-borderless w-auto">
+                        <tr>
+                            <th class="pr-4">Author</th>
+                            <td><t t-esc="book.book_author_id.name or 'none'"/></td>
+                        </tr>
+                        <tr>
+                            <th>ISBN</th>
+                            <td><t t-esc="book.isbn"/></td>
+                        </tr>
+                        <tr>
+                            <th>Condition</th>
+                            <td><t t-esc="book.book_condition"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <t t-if="book.book_image">
+                <div class="pt-4">
+                    <h4>Additional Images</h4>
+                    <div class="row">
+                        <t t-foreach="book.book_image" t-as="att">
+                            <!-- Added pb-4 (padding-bottom) to handle wrapping spacing -->
+                            <div class="col-md-3 text-center pb-4">
+                                <img t-attf-src="data:image/png;base64,{{att.datas}}"
+                                     class="border"
+                                     style="padding: 0px; margin: 0px; height: 150px; width: 150px; object-fit: cover;"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+
+            <div class="pt-4">
+                <a href="/library_management" class="btn btn-primary col-md-3 text-center">
+                    Back to Books
+                </a>
+            </div>
+        </div>
+    </t>
+</template>
 
 </odoo>

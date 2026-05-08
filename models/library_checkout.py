@@ -176,6 +176,13 @@ class LibraryCheckout(models.Model):
                     'quantity': 1,
                     'price_unit': record.penalty,
                 }))
+            if record.checkout_line_ids.book_id:
+                for rec in record.checkout_line_ids.book_id:
+                    sales_count=rec.sale_count
+                    print('sales_count', sales_count)
+                    sales_count = sales_count+1
+                    rec.sale_count = sales_count
+                    print('sale_count', rec.sale_count)
 
             invoice = self.env['account.move'].create({
                 'move_type': 'out_invoice',

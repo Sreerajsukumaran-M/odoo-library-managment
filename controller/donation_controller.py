@@ -18,6 +18,7 @@ class DonationController(http.Controller):
         name=kwargs['name']
         author=kwargs['author']
         isbn=kwargs['isbn']
+        condition=kwargs['condition']
         image_files=kwargs['book_image']
         image_file = request.httprequest.files.getlist('book_image')
         if image_files:
@@ -40,24 +41,24 @@ class DonationController(http.Controller):
             'name':name,
             'isbn':isbn,
             'image':image,
+            'book_condition':condition,
             'book_author_id':authors.id,
             'status':'coming_soon',
         })
         if image_file:
             img_list = []
             for file in image_file:
-                a=base64.b64encode(file.read())
-                if image == a:
+                data=base64.b64encode(file.read())
+                if data == b'':
                     continue
                 else:
                     img_val = {
                         'name': file.filename,
-                        'datas': a,
+                        'datas': data,
                         'res_model': 'library.book',
                         'res_id': new_record.id,
                     }
                     print(img_val)
-
                 img_list.append(request.env['ir.attachment'].sudo().create(img_val).id)
                 print(img_list)
 
@@ -67,3 +68,9 @@ class DonationController(http.Controller):
         return request.render('library_management.success_form_template', {
            'user_name': user_name,
        })
+
+    @http.route('/my/book/<int:book_id>', type='http', auth='user', website=True)
+    def portal_book_detail(self, book_id):
+        book = request.env['library.book'].sudo().browse(book_id)
+        return request.render('library_management.book_detail', {'book': book})
+

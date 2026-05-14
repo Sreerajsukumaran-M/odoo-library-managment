@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+	<t t-name="library_management.category_data">
+         <section class="categories_section o_page_cover_top">
+    	<div t-att-id="id_number" class="container carousel slide" data-bs-ride="carousel"
+             t-att-data-bs-interval="interval">
+       	<div class="carousel-inner row w-100 mx-auto" role="listbox">
+          	<t t-foreach="result" t-as="chunk" t-key="chunk.id">
+                	<div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                     	<div class="row g-4 justify-content-center p-2">
+                        	<t t-foreach="chunk" t-as="category" t-key="category.id">
+                           	<div class="col-12 col-md-4 col-lg-3">
+								<div class="card h-100">
+									<div class="card h-100 border-0 shadow-sm transition-base hover-elevate overflow-hidden">
+                                            <div class="ratio ratio-1x1">
+                                                <t t-if="category.image">
+                                                    <img t-att-src="'data:image/png;base64,' + category.image"
+                                                         class="card-img-top object-fit-cover"
+                                                         t-att-alt="category.name"
+                                                         loading="lazy"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <img src="/library_management/static/src/images/image1.png"
+                                                         class="card-img-top object-fit-contain p-4 opacity-50"
+                                                         loading="lazy"/>
+                                                </t>
+                                            </div>
+										<div>
+											<span class="fw-semibold text-dark text-center d-flex flex-column justify-content-between p-3 text-bg-secondary"
+                                       style="font-size: 15xpx; line-height: 2.3; display: block;">
+                                        <t t-esc="category.name"/>
+                                     </span>
+										</div>
+											 <div class="card-body text-center d-flex flex-column justify-content-between p-3">
+												<a t-attf-href="/my/book/#{category.id}" class="btn btn-primary btn-sm rounded-pill px-4">
+                                                    View Books
+                                                </a>
+												</div>
+									</div>
+								</div>
+                           	</div>
+                        	</t>
+                    	</div>
+                	</div>
+          	</t>
+      	</div>
+    	</div>
+             <button class="carousel-control-prev" data-bs-slide="prev" role="button"
+                aria-label="Previous" title="Previous"  t-attf-data-bs-target="##{id_number}">
+        	  			<i
+                                class="oi oi-chevron-left me-md-n4 rounded-pill p-3 bg-700"
+                                role="img"
+                                aria-label="previous"
+                                title="previous"
+                        />
+    	</button>
+             <button class="carousel-control-next" data-bs-slide="next" role="button"
+                aria-label="Next" title="Next"  t-attf-data-bs-target="##{id_number}">
+        				<i
+                                class="oi oi-chevron-right me-md-n4 rounded-pill p-3 bg-700"
+                                role="img"
+                                aria-label="Next"
+                                title="Next"
+                        />
+    	</button>
+         </section>
+	</t>
+</templates>

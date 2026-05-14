@@ -82,7 +82,6 @@
                     <h4>Additional Images</h4>
                     <div class="row">
                         <t t-foreach="book.book_image" t-as="att">
-                            <!-- Added pb-4 (padding-bottom) to handle wrapping spacing -->
                             <div class="col-md-3 text-center pb-4">
                                 <img t-attf-src="data:image/png;base64,{{att.datas}}"
                                      class="border"
@@ -95,7 +94,10 @@
 
             <div class="pt-4">
                 <a href="/library_management" class="btn btn-primary col-md-3 text-center">
-                    Back to Books
+                    Back to contributions
+                </a>
+                 <a href="/" class="btn btn-secondary col-md-3 text-center">
+                    Back to home
                 </a>
             </div>
         </div>

@@ -73,4 +73,3 @@ class DonationController(http.Controller):
     def portal_book_detail(self, book_id):
         book = request.env['library.book'].sudo().browse(book_id)
         return request.render('library_management.book_detail', {'book': book})
-

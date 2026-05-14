@@ -4,7 +4,7 @@
     'version': '1.0',
     'category': 'Real Estate',
     'summary': 'library managment',
-    'depends': ['base', 'mail', 'contacts', 'sale', 'account', 'website', 'fleet','website_sale'],
+    'depends': ['base', 'mail', 'contacts', 'sale', 'account', 'website', 'fleet', 'website_sale'],
     'application': True,
     'installable': True,
     'sequence': 3,
@@ -20,7 +20,7 @@
         'views/library_donation_template.xml',
         'views/library_donation_template.xml',
         'views/library_customer_portal.xml',
-        # 'views/snippets/category_template.xml',
+        'views/snippets/book_snippet_template.xml',
 
         'views/library_tag_view.xml',
         'views/library_settings_view.xml',
@@ -38,9 +38,10 @@
     'assets': {
         'web.assets_backend': [
             'library_management/static/src/js/action_manager.js',
-            # 'library_management/static/src/js/product_category.js',
-            # 'library_management/static/xml/category_highlight_content.xml',
+        ],
+        'web.assets_frontend': [
+            'library_management/static/src/js/book_category.js',
+            'library_management/static/xml/book_snippet_content.xml',
         ],
     },
-
 }

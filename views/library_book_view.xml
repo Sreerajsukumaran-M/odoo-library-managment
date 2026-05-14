@@ -37,6 +37,7 @@
                 <field name="genres_id"/>
                 <field name="price"/>
                 <field name="cost"/>
+                <field name="sale_count"/>
                 <field name="publication_date"/>
                 <field name="reference_number"/>
                 <field name="status" decoration-success="status in ['available']"

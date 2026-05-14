@@ -8,7 +8,6 @@ class WebsiteProduct(http.Controller):
    def get_product_category(self):
        """Get the website categories for the snippet."""
 
-
        categories = self.env[
            'library.book'].search_read([('sale_count','>',0)],order='sale_count desc')
        values = {

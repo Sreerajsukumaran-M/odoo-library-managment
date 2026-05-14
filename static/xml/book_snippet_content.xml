@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<templates id="template" xml:space="preserve">
+<templates id="book_snippet_content" xml:space="preserve">
 	<t t-name="library_management.category_data">
          <section class="categories_section o_page_cover_top">
     	<div t-att-id="id_number" class="container carousel slide" data-bs-ride="carousel"

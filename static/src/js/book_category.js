@@ -9,7 +9,6 @@ publicWidget.registry.get_product_tab = publicWidget.Widget.extend({
        const result = await rpc('/get_product_categories', {});
        console.log("result=",result)
        if(result && result.categories){
-           console.log("hello 12")
            var chunks=[]
            const data=result.categories;
            for(let i=0 ;i<data.length;i+=4){
